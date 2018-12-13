@@ -76,3 +76,20 @@ services:
            - /data/nextcloud/config:/var/www/html/data
            - /data/nextcloud/themes:/var/www/html/themes
        restart: always
+
+    angelaowre-com:
+       container_name: angelaowre.com
+       image: wordpress
+       restart: always
+       volumes:
+           - /data/angelaowre.com:/user/share/nginx/html
+       environment:
+           - WORDPRESS_DB_HOST=nextcloud-db
+           - WORDPRESS_DB_USER=nextcloud
+           - WORDPRESS_DB_PASSWORD=hzEiF4C4Ej6q58hJ2bowFK6EwatxTbixtiGjf89j7TCpqDBYV9veGnTehMjspWEi
+           - WORDPRESS_TABLE_PREFIX=angelaowre_
+           - WORDPRESS_DB_NAME=nextcloud
+       mem_limit: 50m
+       mem_reservation: 20m
+       links:
+           - nextcloud-db
