@@ -82,7 +82,7 @@ services:
        image: wordpress
        restart: always
        volumes:
-           - /data/angelaowre.com:/user/share/nginx/html
+           - /data/angelaowre.com:/usr/share/nginx/html
        environment:
            - WORDPRESS_DB_HOST=nextcloud-db
            - WORDPRESS_DB_USER=nextcloud
@@ -93,3 +93,21 @@ services:
        mem_reservation: 20m
        links:
            - nextcloud-db
+
+    bartoszbos-com:
+       container_name: bartoszbos.com
+       image: wordpress
+       restart: always
+       volumes:
+           - /data/bartoszbos.com:/usr/share/nginx/html
+       environment:
+           - WORDPRESS_DB_HOST=nextcloud-db
+           - WORDPRESS_DB_USER=nextcloud
+           - WORDPRESS_DB_PASSWORD=hzEiF4C4Ej6q58hJ2bowFK6EwatxTbixtiGjf89j7TCpqDBYV9veGnTehMjspWEi
+           - WORDPRESS_TABLE_PREFIX=bartoszbos_
+           - WORDPRESS_DB_NAME=nextcloud
+       mem_limit: 50m
+       mem_reservation: 20m
+       links:
+           - nextcloud-db
+
