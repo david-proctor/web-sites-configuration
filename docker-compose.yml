@@ -11,47 +11,27 @@ services:
         volumes:
             - ./nginx.conf:/etc/nginx/nginx.conf
             - /data/.well-known/:/usr/share/nginx/html/.well-known/
-            - /etc/letsencrypt/live/davidproctor.io-0003/fullchain.pem:/etc/letsencrypt/live/davidproctor.io/fullchain.pem
-            - /etc/letsencrypt/live/davidproctor.io-0003/privkey.pem:/etc/letsencrypt/live/davidproctor.io/privkey.pem
+            - /etc/letsencrypt/live/davidproctor.io-0002/fullchain.pem:/etc/letsencrypt/live/davidproctor.io/fullchain.pem
+            - /etc/letsencrypt/live/davidproctor.io-0002/privkey.pem:/etc/letsencrypt/live/davidproctor.io/privkey.pem
 
     davidproctor-io:
         container_name: davidproctor.io
-        depends_on:
-            - reverseproxy
         image: nginx:latest
         restart: always
         volumes:
             - /data/davidproctor.io:/usr/share/nginx/html
             - /data/.well-known/:/usr/share/nginx/html/.well-known/
 
-    php:
-        container_name: php
-        depends_on:
-            - reverseproxy
-        image: php:7-fpm
-        ports:
-            - 9000:9000
-        restart: always
-        volumes:
-            - /data/pizzarithmetic.com:/usr/share/nginx/html
- 
     pizzarithmetic-com:
         container_name: pizzarithmetic.com
-        depends_on:
-            - php
         image: nginx:latest
         restart: always
         volumes:
             - /data/pizzarithmetic.com:/usr/share/nginx/html
-            - ./pizzarithmetic.conf:/etc/nginx/conf.d/site.conf
             - /data/.well-known/:/usr/share/nginx/html/.well-known/
-        links:
-            - php
 
     nextcloud-db:
         container_name: nextclouddb
-        depends_on:
-            - reverseproxy
         image: mariadb
         restart: always
         volumes:
