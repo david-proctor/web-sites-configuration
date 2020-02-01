@@ -42,21 +42,6 @@ services:
             - MYSQL_DATABASE=nextcloud
             - MYSQL_USER=nextcloud
 
-    nextcloud:
-       container_name: nextcloud
-       depends_on:
-           - nextcloud-db
-       image: nextcloud
-       links:
-           - nextcloud-db
-       volumes:
-           - /data/nextcloud/main:/var/www/html
-           - /data/nextcloud/apps:/var/www/html/custom_apps
-           - /data/nextcloud/config:/var/www/html/config
-           - /data/nextcloud/config:/var/www/html/data
-           - /data/nextcloud/themes:/var/www/html/themes
-       restart: always
-
     angelaowre-com:
        container_name: angelaowre.com
        image: wordpress
